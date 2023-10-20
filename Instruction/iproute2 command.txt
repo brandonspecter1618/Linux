@@ -1,0 +1,18 @@
+#########################################
+"IPROUTE2"
+
+Add Address
+
+ip addr add 10.61.10.61/24 dev enp0s3
+
+#########################################
+
+Interface UP/DOWN
+
+ip link set enp0s3 down
+
+ip link set enp0s3 up
+
+############################################
+
+

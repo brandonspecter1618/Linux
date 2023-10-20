@@ -1,0 +1,30 @@
+# This file describes the network interfaces available on your system
+# and how to activate them. For more information, see interfaces(5).
+
+source /etc/network/interfaces.d/*
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+#For First Domain
+
+auto enp0s3
+iface enp0s3 inet static
+         address 10.61.10.160
+         netmask 255.255.255.0
+         gateway 10.61.10.1
+         broadcast 255.255.255.0
+         dns-nameservers 10.61.10.160 10.207.112.14 
+
+#For Second Domain
+
+
+auto enp0s3.0
+iface enp0s3 inet static
+         address 10.61.10.161
+         netmask 255.255.255.0
+         gateway 10.61.10.1
+         broadcast 255.255.255.0
+         dns-nameservers 10.61.10.161 10.207.112.14
+

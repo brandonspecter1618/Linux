@@ -1,0 +1,36 @@
+Formatar Pen Drive no Terminal LinuxFormatar Pen Drive no Terminal Linux
+
+
+Identificando o Pen Drive e montar e desmontar
+
+1 = sudo fdisk -l && lsblk
+
+[root]@[debian]: fdisk -l
+[root]@[debian]: lsblk
+
+2 = Para montar o pendrive
+
+[root]@[debian]: mount /dev/sdb1/
+
+3 = Para formatar é necessário desmontar o pendrive 
+
+[root]@[debian]: umount /dev/sdb1
+
+4 = Podemos formatá-lo para diversos formatos de Sistemas de Arquivos (mkfs.vfat, mkfs.ntfs, mkfs.bfs, mkfs.ext2, mkfs.ext3, mkfs.ext4, mkfs.minix, mkfs.msdos, mkfs.vfat, mkfs.xfs, mkfs.xiafs)
+
+NTFS
+
+[root]@[debian]: mkfs.ntfs -I /dev/sdb1
+
+OR
+ 
+sudo mkfs -t ntfs /dev/sdb1
+
+
+FAT32
+
+[root]@[debian]: mkfs.vfat -n NOMEPENDRIVE -I /dev/sdb1
+
+OR
+
+mkfs -t vfat /dev/sdb1
