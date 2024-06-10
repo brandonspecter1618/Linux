@@ -1,0 +1,6 @@
+1 - dpkg -i phpldapadmin_1.2.2-6.1_all.deb
+
+2 - apt-get install -f
+
+3 = apt --fix-broken install
+
