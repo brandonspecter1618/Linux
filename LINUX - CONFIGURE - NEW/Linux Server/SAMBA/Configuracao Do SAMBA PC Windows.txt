@@ -1,0 +1,24 @@
+                                      Habilitar SAMBA PC Windows
+
+##################################################################################################
+
+Ativar SMB 1.0 CIFS
+
+1 = Painel De Controle -> Programas -> Ativar ou Desativar Recursos Do Windows
+
+2 = Ativar a opção: "Suporte Para Compartilhamento De Arquivos SMB 1.O/CIFS"
+
+
+###################################################################################################
+
+Habilitar Logons De Convidados  Não Seguros 
+
+1 = W + R: gpedit.msc
+
+2 = Configuração Do Computador -> Modelos Administrativos -> Rede -> Estação De Trabalho Do LANMAN
+
+3 = Click em "Habilitar Logons De Convidados  Não Seguros"
+
+4 = "Habilitar" e depois "Aplicar"
+
+#################################################################################################### 
