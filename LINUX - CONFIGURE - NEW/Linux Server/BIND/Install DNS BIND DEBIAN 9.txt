@@ -1,0 +1,142 @@
+Install Server DNS 
+
+1 = root@server:~# apt install bind9 bind9-doc dnsutils
+
+2 = Script named.conf.local
+
+//
+// Do any local configuration here
+//
+
+zone "home.lan" {
+    type master;
+    file "/etc/bind/db.home.lan";
+};
+
+zone "1.168.192.in-addr.arpa" {
+    type master;
+    file "/etc/bind/db.1.168.192";
+};
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+
+###########################################################################
+
+3 = Script db.home.lan 
+
+;
+; BIND zone file for home.lan
+;
+
+$TTL    3D
+@       IN      SOA     @               root.home.lan. (
+                        2017061201      ; serial
+                        8H              ; refresh
+                        2H              ; retry
+                        4W              ; expire
+                        1D )            ; minimum
+;
+@               NS      ns              ; Inet address of name server
+@               MX      10 mail         ; Primary mail exchanger
+
+ns              A       192.168.1.100
+mail            A       192.168.1.100
+
+home.lan.       A       192.168.1.100
+server          A       192.168.1.100
+
+virtual         A       192.168.1.101
+
+router          A       192.168.1.1     ; router ADSL
+gateway         CNAME   router
+gw              CNAME   router
+
+OPTIONS
+
+// [...]
+proxy           CNAME   server
+www             CNAME   server
+ftp             CNAME   server
+// [...]
+
+
+4 = root@server:~# named-checkzone home.lan /etc/bind/db.home.lan
+zone home.lan/IN: loaded serial 2017061201
+OK
+
+####################################################################
+
+5 = Script Reverse db.1.168.192
+
+;
+; BIND zone file for 192.168.1.xxx
+;
+
+$TTL    3H
+@       IN      SOA     @               root.home.lan. (
+                        2017061201      ; serial
+                        8H              ; refresh
+                        2H              ; retry
+                        4W              ; expire
+                        1D )            ; minimum
+;
+@               NS      ns.home.lan.    ; Nameserver address
+
+100             PTR     server.home.lan.
+100             PTR     ns.home.lan.
+100             PTR     mail.home.lan.
+101             PTR     virtual.home.lan.
+1               PTR     router.home.lan.
+
+6 = root@server:~# named-checkzone 1.168.192.in-addr.arpa /etc/bind/db.1.168.192
+zone 1.168.192.in-addr.arpa/IN: loaded serial 2017061201
+OK
+
+##########################################################################
+
+7  = root@server:~# named-checkconf -z
+zone home.lan/IN: loaded serial 2017061201
+zone 1.168.192.in-addr.arpa/IN: loaded serial 2017061201
+zone localhost/IN: loaded serial 2
+zone 127.in-addr.arpa/IN: loaded serial 1
+zone 0.in-addr.arpa/IN: loaded serial 1
+zone 255.in-addr.arpa/IN: loaded serial 1
+
+8 = root@server:~# systemctl restart bind9
+
+9 = Verificação
+
+root@server:~# nslookup server
+Server:         127.0.0.1
+Address:        127.0.0.1#53
+
+Name:   server.home.lan
+Address: 192.168.1.100
+
+===============================
+
+root@server:~# nslookup gateway
+Server:         127.0.0.1
+Address:        127.0.0.1#53
+
+gateway.home.lan        canonical name = router.home.lan.
+Name:   router.home.lan
+Address: 192.168.1.1
+
+===============================
+
+root@server:~# nslookup 192.168.1.101
+Server:         127.0.0.1
+Address:        127.0.0.1#53
+
+101.1.168.192.in-addr.arpa       name = virtual.home.lan.
+
+######################################################################
+
+OPTIONS:
+
+10 = Script /etc/network/interfaces
+
+

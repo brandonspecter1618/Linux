@@ -1,0 +1,28 @@
+;
+; BIND zone file for networksystem2.com
+;
+
+$TTL    3D
+@       IN      SOA     networksecurity2.com    root.networksecurity2.com. (
+                        2017061201      ; serial
+                        8H              ; refresh
+                        2H              ; retry
+                        4W              ; expire
+                        1D )            ; minimum
+;
+@               NS      ns              ; Inet address of name server
+@               MX      10 mail         ; Primary mail exchanger
+
+ns              A       10.61.10.161
+mail            A       10.61.10.161
+
+networksecurity2.com.       A       10.61.10.161
+server          A       10.61.10.161
+
+virtual         A       10.61.10.161
+
+router          A       10.61.10.161     ; router ADSL
+gateway         CNAME   router
+gw              CNAME   router
+www             IN      CNAME       10.61.10.161
+
