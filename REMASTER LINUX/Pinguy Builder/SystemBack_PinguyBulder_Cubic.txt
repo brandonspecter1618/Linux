@@ -1,0 +1,43 @@
+Pinguy Builder
+
+Download: https://sourceforge.net/projects/pinguy-os/files/ISO_Builder/
+
+dpkg -i pinguybuilder_5.2-1_all.deb 
+apt-get -f install
+
+1 = Backup: Faz backup do sistema no entanto na versão 5.1-8 não dá para instalação
+2 = Dist: Cria uma Live de um Sistema
+3 = Espere até terminar
+4 = Vá até a pasta /home/pinguybuilder/sua_iso_aqui.iso
+##########################################################################
+
+SystemBack
+
+sudo add-apt-repository ppa:nemh/systemback
+sudo apt-get update
+sudo apt-get install systemback
+
+1 = Diretório De Armazenamento or Directory Store: É o diretório onde será colocado sua imagem live
+
+2 = Criar Sistema Live or Create Live: Click neste botão para criar sua Live
+
+3 = Nome Do Sistema Live or Name System: Nome do Arquivo Live
+
+3.1 = Opções or Options: Marque esta opção para salvar arquivos do usuário se não será instalado uma imagem natural do UBUNTU.
+
+4 = Criar Nova or Create New: Click neste botão para criar a Live e espere até terminar.
+
+5 = O arquivo criado estará como "sblive" ("S" ystem "B" ack Live). Neste caso, no próprio Software tem uma opção chamado "Convert to ISO"
+este utilizado para converter de sb.live para ISO instalável. Portanto, click no botão e espere.
+
+
+--------------------
+
+TERMINAL caso não consiga iniciar a interface gráfica.
+
+systemback-cli 
+
+Depois é só escolher as opções
+
+
+
