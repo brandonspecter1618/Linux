@@ -1,0 +1,7 @@
+sudo apt-get install nmap
+then
+
+nmap -sP 192.168.1.*
+or more commonly
+
+nmap -sn 192.168.1.0/24
